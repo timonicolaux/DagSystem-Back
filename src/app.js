@@ -67,12 +67,14 @@ app.get('/course', async (req, res) => {
 
 // RECUPERER UNE APPLICATION ET SES COURSES (ICI L'APPLICATION AVEC L'ID '1') //
 
-app.get('/application-courses', async (req, res) => {
+app.get('/application-courses/:id', async (req, res) => {
   try {
+    const applicationId = req.params.id;
     const [application] = await db
       .promise()
       .query(
-        'SELECT * FROM application a INNER JOIN course c ON a.id=c.application_id WHERE c.application_id=1'
+        'SELECT * FROM application a INNER JOIN course c ON a.id=c.application_id WHERE c.application_id=?',
+        [applicationId]
       );
     res.status(200).send(application);
   } catch (err) {
