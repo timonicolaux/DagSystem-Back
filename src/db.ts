@@ -5,7 +5,7 @@ const {
   DB_USER,
   DB_PASS,
   DB_NAME,
-} = require('./environment.js');
+} = require('./environment.ts');
 
 const connection = mysql.createConnection({
   host: DB_HOST,
